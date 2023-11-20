@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
  * | Hell  |   Y   |   X   |   C   |   V   |   B   |   N   |   M   |   ,   |   .   |   -   | Heaven|
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * | Ctrl  |   <   | GUI   | Alt   | Lower |Spc/Sft|Spc/Sft| Raise |  Left |  Down |   Up  | Right |
+ * | Ctrl  |   <   | GUI   | Alt   | Lower | Space | Shift | Raise |  Left |  Down |   Up  | Right |
  * `-----------------------------------------------------------------------------------------------'
  */
 [_WINDOWS] = LAYOUT_preonic_grid(
@@ -124,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_BSPC,
   KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,   KC_NUHS, KC_ENT,
     HELL,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, HEAVEN,
-  KC_LCTL, KC_NUBS, KC_LGUI, KC_LALT, LOWER,LSFT_SPC,RSFT_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+  KC_LCTL, KC_NUBS, KC_LGUI, KC_LALT, LOWER, KC_SPC, KC_RSFT,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Lower
@@ -757,7 +757,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 /* Start combos */
 
-const uint16_t PROGMEM double_space[] = {LSFT_SPC, RSFT_SPC, COMBO_END};
+const uint16_t PROGMEM double_space[] = {KC_SPC, KC_RSFT, COMBO_END};
 combo_t key_combos[] = {
     COMBO(double_space, CW_TOGG),
 };
@@ -783,17 +783,17 @@ bool caps_word_press_user(uint16_t keycode) {
 
 /* End combos */
 
-bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case LSFT_SPC:
-        case RSFT_SPC:
-            // Immediately select the hold action when another key is tapped.
-            return true;
-        default:
-            // Do not select the hold action when another key is tapped.
-            return false;
-    }
-}
+//bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+//    switch (keycode) {
+//        case LSFT_SPC:
+//        case RSFT_SPC:
+//            // Immediately select the hold action when another key is tapped.
+//            return true;
+//        default:
+//            // Do not select the hold action when another key is tapped.
+//            return false;
+//    }
+//}
 
 void matrix_scan_user(void) {
 

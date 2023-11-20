@@ -20,8 +20,8 @@
 //#define TAPPING_TERM_PER_KEY
 
 // Permissive hold
-#define HOLD_ON_OTHER_KEY_PRESS
-#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+//#define HOLD_ON_OTHER_KEY_PRESS
+//#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
 // Define mouse variables
 #define MK_COMBINED
