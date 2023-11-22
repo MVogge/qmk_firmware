@@ -30,10 +30,6 @@ enum preonic_keycodes {
   MACOS,
   LOWER,
   RAISE,
-  HELL,
-  HELL_ON,
-  HELL_OFF,
-  HEAVEN,
   BACKLIT,
   OS_A,
   OS_S,
@@ -77,6 +73,9 @@ enum tap_dance_keycodes {
 #define MOVE_UP S(A(KC_UP))
 #define CKC_DLLR S(KC_4)
 #define CKC_EURO C(A(KC_E))
+#define HELL TT(_HELL)
+#define HELL_TG TG(_HELL)
+#define HEAVEN TG(_HEAVEN)
 
 // Key Overrides
 const key_override_t kp_1_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_KP_1, S(KC_1));
@@ -119,11 +118,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------------------'
  */
 [_WINDOWS] = LAYOUT_preonic_grid(
-  KC_MPLY, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,   KC_0,    KC_DEL,
-  KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_BSPC,
-  KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,   KC_NUHS, KC_ENT,
-    HELL,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, HEAVEN,
-  KC_LCTL, KC_NUBS, KC_LGUI, KC_LALT, LOWER, KC_SPC, KC_RSFT,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+  KC_MPLY, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  KC_DEL,
+   KC_ESC,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC,
+   KC_TAB,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_NUHS,  KC_ENT,
+     HELL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  HEAVEN,
+  KC_LCTL, KC_NUBS, KC_LGUI, KC_LALT,   LOWER,  KC_SPC, KC_RSFT,   RAISE, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT
 ),
 
 /* Lower
@@ -141,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT_preonic_grid(
   _______, KC_BRID, KC_BRIU, KC_MPRV, KC_MNXT, _______, _______, _______, _______, _______, _______,  OS_DEL,
-  _______, _______, _______, OS_DEV,    OS_R, _______,    OS_Z, KC_KP_7, KC_KP_8, KC_KP_9,  KC_DEL, OS_BSPC,
+  _______, _______, _______,  OS_DEV,    OS_R, _______,    OS_Z, KC_KP_7, KC_KP_8, KC_KP_9,  KC_DEL, OS_BSPC,
   OS_PRGN,    OS_A,    OS_S,    OS_D,    OS_F,OS_SFT_R, _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_BSPC,  OS_ENT,
   _______,    OS_Y,    OS_X,    OS_C,    OS_V,    OS_B, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3,  KC_ENT, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, OS_WRDL, MOVE_DN, MOVE_UP, OS_WRDR
@@ -193,21 +192,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------------------.
  * |       |       |       |       |       |       |       |       |       |       |       |       |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |  Esc  |MS_BTN4| MS_U  |MS_BTN5|       |       |       |       |       |       |       |       |
+ * |  Esc  |MS_BTN3|MS_BTN4| MS_U  |MS_BTN5|       |       |       |       |       |       |       |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       | MS_L  | MS_D  | MS_R  |       |       |       |       |       |       |       |       |
+ * |       |       | MS_L  | MS_D  | MS_R  |       |       |       |       |       |       |       |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
  * |LYR_OFF|MS_WH_L|MS_WH_D|MS_WH_U|MS_WH_R|       |       |       |       |       |       |       |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       |       |       |LYR_ON |MS_ACL0|MS_BTN1|MS_BTN2|       |       |       |       |       |
+ * |       |       |       |       |MS_BTN1|MS_BTN2|       |       |       |       |       |       |
  * `-----------------------------------------------------------------------------------------------'
  */
 [_HELL] = LAYOUT_preonic_grid(
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-   KC_ESC, XXXXXXX, KC_BTN4, KC_MS_U, KC_BTN5, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+   KC_ESC, KC_BTN3, KC_BTN4, KC_MS_U, KC_BTN5, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX, XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
- HELL_OFF, XXXXXXX, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX, HELL_ON, KC_ACL0, KC_BTN1, KC_BTN2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+  HELL_TG, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  _______, XXXXXXX, _______, _______, KC_BTN1, KC_BTN2, _______, XXXXXXX, _______, _______, _______, _______
 ),
 
 /* Heaven
@@ -227,7 +226,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  HEAVEN,
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
 
@@ -237,7 +236,6 @@ bool is_windows = true;
 uint8_t mod_state;
 bool is_backslash_registered = false;
 bool is_program_switch_registered = false;
-bool keep_hell_on = false;
 
 //check numlock and turn on when needed
 static void check_numlock(void) {
@@ -287,7 +285,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_mods(MOD_MASK_SA);
               }
               is_backslash_registered = false;
-              register_mods(MOD_BIT(KC_LSFT));
+              register_mods(MOD_BIT(KC_RSFT));
               return false;
             }
           }
@@ -660,30 +658,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
           return false;
           break;
-        case HELL:
-          if (record->event.pressed) {
-            layer_on(_HELL);
-          } else {
-            if (!keep_hell_on) {
-              layer_off(_HELL);
-            }
-          }
-          return false;
-          break;
-        case HELL_ON:
-          if (record->event.pressed) {
-            layer_on(_HELL);
-            keep_hell_on = true;
-          }
-          return false;
-          break;
-        case HELL_OFF:
-          if (record->event.pressed) {
-            layer_off(_HELL);
-            keep_hell_on = false;
-          }
-          return false;
-          break;
       }
     return true;
 };
@@ -821,5 +795,9 @@ bool caps_word_press_user(uint16_t keycode) {
 //}
 
 void matrix_scan_user(void) {
-
+  if (get_highest_layer(layer_state) == _HELL) {
+    if (last_input_activity_elapsed() > 5000) {
+      layer_off(_HELL);
+    }
+  }
 }

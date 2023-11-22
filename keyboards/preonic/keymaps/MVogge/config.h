@@ -26,9 +26,12 @@
 // Define mouse variables
 #define MOUSEKEY_DELAY          0
 #define MOUSEKEY_INTERVAL       16
-#define MOUSEKEY_WHEEL_DELAY    0
+#define MOUSEKEY_WHEEL_DELAY    10
 #define MOUSEKEY_MAX_SPEED      6
 #define MOUSEKEY_TIME_TO_MAX    64
+
+// Define how often Layer Tap-Toggles have to be tapped
+#define TAPPING_TOGGLE 2
 
 #ifdef AUDIO_ENABLE
 #    define STARTUP_SONG SONG(PREONIC_SOUND)
