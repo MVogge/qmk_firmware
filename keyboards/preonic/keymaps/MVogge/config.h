@@ -33,6 +33,14 @@
 // Define how often Layer Tap-Toggles have to be tapped
 #define TAPPING_TOGGLE 2
 
+// Disable dynamic macro nesting
+#define DYNAMIC_MACRO_NO_NESTING
+
+// Leader key settings
+#define LEADER_PER_KEY_TIMING
+#define LEADER_TIMEOUT 250
+#define LEADER_NO_TIMEOUT
+
 #ifdef AUDIO_ENABLE
 #    define STARTUP_SONG SONG(PREONIC_SOUND)
 // #define STARTUP_SONG SONG(NO_SOUND)

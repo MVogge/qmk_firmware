@@ -5,3 +5,5 @@ AUDIO_ENABLE = no           # disable Audio
 KEY_OVERRIDE_ENABLE = yes   # enable key overrides
 CAPS_WORD_ENABLE = yes      # enable caps word
 COMBO_ENABLE = yes
+DYNAMIC_MACRO_ENABLE = yes
+LEADER_ENABLE = yes

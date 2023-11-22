@@ -87,6 +87,7 @@ const key_override_t kp_6_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_KP_6, 
 const key_override_t kp_7_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_KP_7, S(KC_7));
 const key_override_t kp_8_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_KP_8, S(KC_8));
 const key_override_t kp_9_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_KP_9, S(KC_9));
+const key_override_t backspace_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
 
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){
@@ -99,6 +100,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &kp_7_key_override,
     &kp_8_key_override,
     &kp_9_key_override,
+    &backspace_key_override,
     NULL // Null terminate the array of overrides!
 };
 
@@ -106,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Windows
  * ,-----------------------------------------------------------------------------------------------.
- * |Ply/Pse|   1   |   2   |   3   |   4   |   5   |   6   |   7   |   8   |   9   |   0   |  Del  |
+ * |Ply/Pse|       |       |       |       |       |       |       |       |       |       |Leader |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
  * | Esc   |   Q   |   W   |   E   |   R   |   T   |   Z   |   U   |   I   |   O   |   P   | Bksp  |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
@@ -118,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------------------'
  */
 [_WINDOWS] = LAYOUT_preonic_grid(
-  KC_MPLY, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  KC_DEL,
+  KC_MPLY, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, QK_LEAD,
    KC_ESC,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC,
    KC_TAB,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_NUHS,  KC_ENT,
      HELL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  HEAVEN,
@@ -139,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------------------'
  */
 [_LOWER] = LAYOUT_preonic_grid(
-  _______, KC_BRID, KC_BRIU, KC_MPRV, KC_MNXT, _______, _______, _______, _______, _______, _______,  OS_DEL,
+  _______, KC_BRID, KC_BRIU, KC_MPRV, KC_MNXT, _______, _______, _______, _______, _______, _______, _______,
   _______, _______, _______,  OS_DEV,    OS_R, _______,    OS_Z, KC_KP_7, KC_KP_8, KC_KP_9,  KC_DEL, OS_BSPC,
   OS_PRGN,    OS_A,    OS_S,    OS_D,    OS_F,OS_SFT_R, _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_BSPC,  OS_ENT,
   _______,    OS_Y,    OS_X,    OS_C,    OS_V,    OS_B, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3,  KC_ENT, _______,
@@ -160,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_preonic_grid(
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  KC_DEL,
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
   _______,   OS_AT, _______,CKC_EURO, _______, _______, _______, KC_LBRC, _______, KC_SCLN, _______,  OS_DLN,
   _______, KC_QUOT, KC_MINS, _______, _______, _______,  KC_GRV,TD(TD_BRCL),TD(TD_BRCR), KC_PAST, KC_PPLS,  KC_ENT,
   _______, _______, _______, _______, _______, _______,  KC_EQL,CKC_DLLR, S(KC_0), KC_PSLS, OS_TLDE, _______,
@@ -194,9 +196,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
  * |  Esc  |MS_BTN3|MS_BTN4| MS_U  |MS_BTN5|       |       |       |       |       |       |       |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       |       | MS_L  | MS_D  | MS_R  |       |       |       |       |       |       |       |
+ * |       |       | MS_L  | MS_D  | MS_R  |       |       |DM_REC1|DM_PLY1|DM_RSTP|       |       |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |LYR_OFF|MS_WH_L|MS_WH_D|MS_WH_U|MS_WH_R|       |       |       |       |       |       |       |
+ * |LYR_OFF|MS_WH_L|MS_WH_D|MS_WH_U|MS_WH_R|       |       |DM_REC2|DM_PLY2|DM_RSTP|       |       |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
  * |       |       |       |       |MS_BTN1|MS_BTN2|       |       |       |       |       |       |
  * `-----------------------------------------------------------------------------------------------'
@@ -204,8 +206,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_HELL] = LAYOUT_preonic_grid(
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
    KC_ESC, KC_BTN3, KC_BTN4, KC_MS_U, KC_BTN5, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  HELL_TG, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX, DM_REC1, DM_PLY1, DM_RSTP, XXXXXXX, XXXXXXX,
+  HELL_TG, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, XXXXXXX, XXXXXXX, DM_REC2, DM_PLY2, DM_RSTP, XXXXXXX, XXXXXXX,
   _______, XXXXXXX, _______, _______, KC_BTN1, KC_BTN2, _______, XXXXXXX, _______, _______, _______, _______
 ),
 
@@ -793,6 +795,25 @@ bool caps_word_press_user(uint16_t keycode) {
 //            return false;
 //    }
 //}
+
+/* Start leader */
+void leader_start_user(void) {
+    // Do something when the leader key is pressed
+}
+
+void leader_end_user(void) {
+    if (leader_sequence_three_keys(KC_I, KC_P, KC_S)) {
+        SEND_STRING("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
+    } else if (leader_sequence_three_keys(KC_K, KC_U, KC_R)) {
+        SEND_STRING("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.");
+    } else if (leader_sequence_two_keys(KC_B, KC_B)) {
+        tap_code16(G(KC_SPC));
+        wait_ms(100);
+        SEND_STRING("bitwarden");
+        tap_code(KC_ENT);
+    }
+}
+/* End leader */
 
 void matrix_scan_user(void) {
   if (get_highest_layer(layer_state) == _HELL) {
