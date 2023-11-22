@@ -61,7 +61,8 @@ enum preonic_keycodes {
   OS_AT,
   OS_TLDE,
   OS_PRGN,
-  OS_DLN
+  OS_DLN,
+  OS_PIPE
 };
 
 // Tap dance enums
@@ -77,7 +78,6 @@ enum tap_dance_keycodes {
 #define MOVE_UP S(A(KC_UP))
 #define CKC_DLLR S(KC_4)
 #define CKC_EURO C(A(KC_E))
-#define CKC_PIPE C(A(KC_NUBS))
 
 // Key Overrides
 const key_override_t kp_1_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_KP_1, S(KC_1));
@@ -166,7 +166,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,   OS_AT, _______,CKC_EURO, _______, _______, _______, KC_LBRC, _______, KC_SCLN, _______,  OS_DLN,
   _______, KC_QUOT, KC_MINS, _______, _______, _______,  KC_GRV,TD(TD_BRCL),TD(TD_BRCR), KC_PAST, KC_PPLS,  KC_ENT,
   _______, _______, _______, _______, _______, _______,  KC_EQL,CKC_DLLR, S(KC_0), KC_PSLS, OS_TLDE, _______,
-  _______,CKC_PIPE, _______, _______, _______, _______, _______, _______, OS_STRT, KC_PGDN ,KC_PGUP,  OS_END
+  _______, OS_PIPE, _______, _______, _______, _______, _______, _______, OS_STRT, KC_PGDN ,KC_PGUP,  OS_END
 ),
 
 /* Adjust (Lower + Raise)
@@ -575,20 +575,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (record->event.pressed) {
             if (is_windows) {
               tap_code(KC_END);
+              tap_code(KC_HOME);
+              tap_code(KC_HOME);
               register_code(KC_LSFT);
-              tap_code(KC_UP);
               tap_code(KC_END);
+              tap_code(KC_RGHT);
               tap_code(KC_BSPC);
               unregister_code(KC_LSFT);
             } else {
               tap_code16(G(KC_RGHT));
+              tap_code16(G(KC_LEFT));
+              tap_code16(G(KC_LEFT));
               register_code(KC_LSFT);
-              tap_code(KC_UP);
               tap_code16(G(KC_RGHT));
+              tap_code(KC_RGHT);
               tap_code(KC_BSPC);
               unregister_code(KC_LSFT);
             }
           }
+          return false;
+          break;
+        case OS_PIPE:
+          if (record->event.pressed) {
+            if (is_windows) {
+              register_code16(C(A(KC_NUBS)));
+            } else {
+              register_code16(A(KC_7));
+            }
+          } else {
+             if (is_windows) {
+               unregister_code16(C(A(KC_NUBS)));
+             } else {
+               unregister_code16(A(KC_7));
+             }
+           }
           return false;
           break;
         case LOWER:
