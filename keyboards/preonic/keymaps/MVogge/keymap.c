@@ -22,8 +22,7 @@ enum preonic_layers {
   _RAISE,
   _ADJUST,
   _HELL,
-  _HEAVEN,
-  _EARTH
+  _HEAVEN
 };
 
 enum preonic_keycodes {
@@ -225,34 +224,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------------------'
  */
 [_HEAVEN] = LAYOUT_preonic_grid(
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
-
-/* Earth
- * ,-----------------------------------------------------------------------------------------------.
- * |       |       |       |       |       |       |       |       |       |       |       |       |
- * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       |       |       |       |       |       |       |       |       |       |       |       |
- * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       |       |       |       |       |       |       |       |       |       |       |       |
- * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       |       |       |       |       |       |       |       |       |       |       |       |
- * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       |       |       |       |       |       |       |       |       |       |       |       |
- * `-----------------------------------------------------------------------------------------------'
- */
-[_EARTH] = LAYOUT_preonic_grid(
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-)
-
 
 };
 
@@ -686,11 +663,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case HELL:
           if (record->event.pressed) {
             layer_on(_HELL);
-            update_tri_layer(_HELL, _HEAVEN, _EARTH);
           } else {
             if (!keep_hell_on) {
               layer_off(_HELL);
-              update_tri_layer(_HELL, _HEAVEN, _EARTH);
             }
           }
           return false;
@@ -698,7 +673,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case HELL_ON:
           if (record->event.pressed) {
             layer_on(_HELL);
-            update_tri_layer(_HELL, _HEAVEN, _EARTH);
             keep_hell_on = true;
           }
           return false;
@@ -706,18 +680,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case HELL_OFF:
           if (record->event.pressed) {
             layer_off(_HELL);
-            update_tri_layer(_HELL, _HEAVEN, _EARTH);
             keep_hell_on = false;
-          }
-          return false;
-          break;
-        case HEAVEN:
-          if (record->event.pressed) {
-            layer_on(_HEAVEN);
-            update_tri_layer(_HELL, _HEAVEN, _EARTH);
-          } else {
-            layer_off(_HEAVEN);
-            update_tri_layer(_HELL, _HEAVEN, _EARTH);
           }
           return false;
           break;

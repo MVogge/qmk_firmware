@@ -24,11 +24,11 @@
 //#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
 // Define mouse variables
-#define MK_COMBINED
-#define MOUSEKEY_INTERVAL 16
-#define MOUSEKEY_MOVE_DELTA 5
-#define MOUSEKEY_MAX_SPEED 8
-#define MOUSEKEY_TIME_TO_MAX 50
+#define MOUSEKEY_DELAY          0
+#define MOUSEKEY_INTERVAL       16
+#define MOUSEKEY_WHEEL_DELAY    0
+#define MOUSEKEY_MAX_SPEED      6
+#define MOUSEKEY_TIME_TO_MAX    64
 
 #ifdef AUDIO_ENABLE
 #    define STARTUP_SONG SONG(PREONIC_SOUND)
