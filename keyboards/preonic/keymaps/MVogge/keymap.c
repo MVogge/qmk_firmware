@@ -41,17 +41,17 @@ enum preonic_keycodes {
   OS_D,
   OS_F,
   OS_R,
+  OS_SFT_R,
   OS_B,
   OS_V,
   OS_C,
   OS_X,
   OS_Y,
   OS_Z,
-  OS_SFT_I,
-  OS_SFT_M,
   OS_DEL,
   OS_BSPC,
   OS_ENT,
+  OS_DEV,
   OS_WRDL,
   OS_WRDR,
   OS_STRT,
@@ -131,9 +131,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------------------.
  * |       |KC_BRID|KC_BRIU|KC_MPRV|KC_MNXT|       |       |       |       |       |       | OS_DEL|
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       |       |       |OS_SFTI| OS_R  |       |  OS_Z |  KP_7 |  KP_8 |  KP_9 |  Del  |OS_BSPC|
+ * |       |       |       |OS_DEV | OS_R  |       |  OS_Z |  KP_7 |  KP_8 |  KP_9 |  Del  |OS_BSPC|
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |OS_PRGN| OS_A  | OS_S  | OS_D  | OS_F  |OS_SFTM|       |  KP_4 |  KP_5 |  KP_6 | Bksp  | OS_ENT|
+ * |OS_PRGN| OS_A  | OS_S  | OS_D  | OS_F  |OS_SFTR|       |  KP_4 |  KP_5 |  KP_6 | Bksp  | OS_ENT|
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
  * |       | OS_Y  | OS_X  | OS_C  | OS_V  | OS_B  |  KP_0 |  KP_1 |  KP_2 |  KP_3 | Enter |       |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
@@ -142,8 +142,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT_preonic_grid(
   _______, KC_BRID, KC_BRIU, KC_MPRV, KC_MNXT, _______, _______, _______, _______, _______, _______,  OS_DEL,
-  _______, _______, _______,OS_SFT_I,    OS_R, _______,    OS_Z, KC_KP_7, KC_KP_8, KC_KP_9,  KC_DEL, OS_BSPC,
-  OS_PRGN,    OS_A,    OS_S,    OS_D,    OS_F,OS_SFT_M, _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_BSPC,  OS_ENT,
+  _______, _______, _______, OS_DEV,    OS_R, _______,    OS_Z, KC_KP_7, KC_KP_8, KC_KP_9,  KC_DEL, OS_BSPC,
+  OS_PRGN,    OS_A,    OS_S,    OS_D,    OS_F,OS_SFT_R, _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_BSPC,  OS_ENT,
   _______,    OS_Y,    OS_X,    OS_C,    OS_V,    OS_B, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3,  KC_ENT, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, OS_WRDL, MOVE_DN, MOVE_UP, OS_WRDR
 ),
@@ -366,6 +366,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
           return false;
           break;
+        case OS_SFT_R:
+          if (record->event.pressed) {
+            if (is_windows) {
+              tap_code16(C(S(KC_R)));
+            } else {
+              tap_code16(G(S(KC_R)));
+            }
+          }
+          return false;
+          break;
         case OS_B:
           if (record->event.pressed) {
             if (is_windows) {
@@ -409,39 +419,41 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OS_Y:
           if (record->event.pressed) {
             if (is_windows) {
-              tap_code16(C(KC_Z));
+              register_code16(C(KC_Z));
             } else {
-              tap_code16(G(KC_Z));
+              register_code16(G(KC_Z));
             }
-          }
+          } else {
+             if (is_windows) {
+               unregister_code16(C(KC_Z));
+             } else {
+               unregister_code16(G(KC_Z));
+             }
+           }
           return false;
           break;
         case OS_Z:
           if (record->event.pressed) {
             if (is_windows) {
-              tap_code16(C(KC_Y));
+              register_code16(C(KC_Y));
             } else {
-              tap_code16(G(KC_Y));
+              register_code16(G(KC_Y));
             }
-          }
+          } else {
+             if (is_windows) {
+               unregister_code16(C(KC_Y));
+             } else {
+               unregister_code16(G(KC_Y));
+             }
+           }
           return false;
           break;
-        case OS_SFT_I:
+        case OS_DEV:
           if (record->event.pressed) {
             if (is_windows) {
               tap_code16(C(S(KC_I)));
             } else {
-              tap_code16(G(S(KC_I)));
-            }
-          }
-          return false;
-          break;
-        case OS_SFT_M:
-          if (record->event.pressed) {
-            if (is_windows) {
-              tap_code16(C(S(KC_M)));
-            } else {
-              tap_code16(G(S(KC_M)));
+              tap_code16(G(A(KC_I)));
             }
           }
           return false;
@@ -449,21 +461,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OS_DEL:
           if (record->event.pressed) {
             if (is_windows) {
-              tap_code16(C(KC_DEL));
+              register_code16(C(KC_DEL));
             } else {
-              tap_code16(A(KC_DEL));
+              register_code16(A(KC_DEL));
             }
-          }
+          } else {
+             if (is_windows) {
+               unregister_code16(C(KC_DEL));
+             } else {
+               unregister_code16(A(KC_DEL));
+             }
+           }
           return false;
           break;
         case OS_BSPC:
           if (record->event.pressed) {
             if (is_windows) {
-              tap_code16(C(KC_BSPC));
+              register_code16(C(KC_BSPC));
             } else {
-              tap_code16(A(KC_BSPC));
+              register_code16(A(KC_BSPC));
             }
-          }
+          } else {
+             if (is_windows) {
+               unregister_code16(C(KC_BSPC));
+             } else {
+               unregister_code16(A(KC_BSPC));
+             }
+           }
           return false;
           break;
         case OS_ENT:
@@ -481,31 +505,49 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OS_WRDL:
           if (record->event.pressed) {
             if (is_windows) {
-              tap_code16(C(KC_LEFT));
+              register_code16(C(KC_LEFT));
             } else {
-              tap_code16(A(KC_LEFT));
+              register_code16(A(KC_LEFT));
             }
-          }
+          } else {
+             if (is_windows) {
+               unregister_code16(C(KC_LEFT));
+             } else {
+               unregister_code16(A(KC_LEFT));
+             }
+           }
           return false;
           break;
         case OS_WRDR:
           if (record->event.pressed) {
             if (is_windows) {
-              tap_code16(C(KC_RGHT));
+              register_code16(C(KC_RGHT));
             } else {
-              tap_code16(A(KC_RGHT));
+              register_code16(A(KC_RGHT));
             }
-          }
+          } else {
+             if (is_windows) {
+               unregister_code16(C(KC_RGHT));
+             } else {
+               unregister_code16(A(KC_RGHT));
+             }
+           }
           return false;
           break;
         case OS_AT:
           if (record->event.pressed) {
             if (is_windows) {
-              tap_code16(ALGR(KC_Q));
+              register_code16(ALGR(KC_Q));
             } else {
-              tap_code16(A(KC_L));
+              register_code16(A(KC_L));
             }
-          }
+          } else {
+             if (is_windows) {
+               unregister_code16(ALGR(KC_Q));
+             } else {
+               unregister_code16(A(KC_L));
+             }
+           }
           return false;
           break;
         case OS_FRMT:
