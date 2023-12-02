@@ -17,7 +17,8 @@
 #include QMK_KEYBOARD_H
 
 enum preonic_layers {
-  _WINDOWS,
+  _QWERTZ,
+  _APTv3,
   _LOWER,
   _RAISE,
   _ADJUST,
@@ -75,7 +76,8 @@ enum tap_dance_keycodes {
 #define CKC_EURO C(A(KC_E))
 #define HELL TT(_HELL)
 #define HELL_TG TG(_HELL)
-#define HEAVEN TG(_HEAVEN)
+#define QWERTZ DF(_QWERTZ)
+#define APTv3 DF(_APTv3)
 
 // Key Overrides
 const key_override_t kp_1_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_KP_1, S(KC_1));
@@ -106,9 +108,9 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* Windows
+/* QWERTZ
  * ,-----------------------------------------------------------------------------------------------.
- * |Ply/Pse|       |       |       |       |       |       |       |       |       |       |Leader |
+ * |Ply/Pse|Leader |       |       |       |       |       |       |       |       |       |  Del  |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
  * | Esc   |   Q   |   W   |   E   |   R   |   T   |   Z   |   U   |   I   |   O   |   P   | Bksp  |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
@@ -119,11 +121,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Ctrl  |   <   | GUI   | Alt   | Lower | Space | Shift | Raise |  Left |  Down |   Up  | Right |
  * `-----------------------------------------------------------------------------------------------'
  */
-[_WINDOWS] = LAYOUT_preonic_grid(
-  KC_MPLY, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, QK_LEAD,
+[_QWERTZ] = LAYOUT_preonic_grid(
+  KC_MPLY, QK_LEAD, _______, _______, _______, _______, _______, _______, _______, _______, _______,  KC_DEL,
    KC_ESC,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC,
    KC_TAB,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_NUHS,  KC_ENT,
-     HELL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  HEAVEN,
+     HELL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,
+  KC_LCTL, KC_NUBS, KC_LGUI, KC_LALT,   LOWER,  KC_SPC, KC_RSFT,   RAISE, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT
+),
+
+/* APTv3
+ * ,-----------------------------------------------------------------------------------------------.
+ * |Ply/Pse|Leader |       |       |       |       |       |       |       |       |       |  Del  |
+ * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
+ * | Esc   |   W   |   G   |   D   |   F   |   B   |   Q   |   L   |   U   |   O   |   Z   | Bksp  |
+ * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
+ * | Tab   |   R   |   S   |   T   |   H   |   K   |   J   |   N   |   E   |   A   |   I   | Enter |
+ * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
+ * | Hell  |   X   |   C   |   M   |   P   |   V   |   Y   |   ,   |   .   |   #   |   -   | Heaven|
+ * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
+ * | Ctrl  |   <   | GUI   | Alt   | Lower | Space | Shift | Raise |  Left |  Down |   Up  | Right |
+ * `-----------------------------------------------------------------------------------------------'
+ */
+[_APTv3] = LAYOUT_preonic_grid(
+  KC_MPLY, QK_LEAD, _______, _______, _______, _______, _______, _______, _______, _______, _______,  KC_DEL,
+   KC_ESC,    KC_W,    KC_G,    KC_D,    KC_F,    KC_B,    KC_Q,    KC_L,    KC_U,    KC_O,    KC_Y, KC_BSPC,
+   KC_TAB,    KC_R,    KC_S,    KC_T,    KC_H,    KC_K,    KC_J,    KC_N,    KC_E,    KC_A,    KC_I,  KC_ENT,
+     HELL,    KC_X,    KC_C,    KC_M,    KC_P,    KC_V,    KC_Z, KC_COMM, KC_DOT,  KC_NUHS, KC_SLSH, KC_RSFT,
   KC_LCTL, KC_NUBS, KC_LGUI, KC_LALT,   LOWER,  KC_SPC, KC_RSFT,   RAISE, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT
 ),
 
@@ -141,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------------------'
  */
 [_LOWER] = LAYOUT_preonic_grid(
-  _______, KC_BRID, KC_BRIU, KC_MPRV, KC_MNXT, _______, _______, _______, _______, _______, _______, _______,
+  _______, KC_BRID, KC_BRIU, KC_MPRV, KC_MNXT, _______, _______, _______, _______, _______, _______,  OS_DEL,
   _______, _______, _______,  OS_DEV,    OS_R, _______,    OS_Z, KC_KP_7, KC_KP_8, KC_KP_9,  KC_DEL, OS_BSPC,
   OS_PRGN,    OS_A,    OS_S,    OS_D,    OS_F,OS_SFT_R, _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_BSPC,  OS_ENT,
   _______,    OS_Y,    OS_X,    OS_C,    OS_V,    OS_B, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3,  KC_ENT, _______,
@@ -177,7 +200,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
  * |       |BL_TOGG|       | MacOS |Windows|       |       |       |       |OS_FRMT|       |       |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       |BL_STEP|       |       |       |       |       |       |       |OS_CMNT|       |       |
+ * |       |BL_STEP|       | APTv3 | QWERTZ|       |       |       |       |OS_CMNT|       |       |
  * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
  * |       |       |       |       |       |       |       |       |       |       |       |       |
  * `-----------------------------------------------------------------------------------------------'
@@ -186,7 +209,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   QK_BOOT, DB_TOGG, _______, _______, _______, _______, _______, _______, _______, _______, _______,  KC_DEL,
   _______, RGB_TOG, _______,   MACOS, WINDOWS, _______, _______, _______, _______, OS_FRMT, _______, _______,
-  _______, RGB_MOD, _______, _______, _______, _______, _______, _______, _______, OS_CMNT, _______, _______,
+  _______, RGB_MOD, _______,   APTv3,  QWERTZ, _______, _______, _______, _______, OS_CMNT, _______, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
@@ -209,27 +232,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX, DM_REC1, DM_PLY1, DM_RSTP, XXXXXXX, XXXXXXX,
   HELL_TG, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, XXXXXXX, XXXXXXX, DM_REC2, DM_PLY2, DM_RSTP, XXXXXXX, XXXXXXX,
   _______, XXXXXXX, _______, _______, KC_BTN1, KC_BTN2, _______, XXXXXXX, _______, _______, _______, _______
-),
-
-/* Heaven
- * ,-----------------------------------------------------------------------------------------------.
- * |       |       |       |       |       |       |       |       |       |       |       |       |
- * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       |       |       |       |       |       |       |       |       |       |       |       |
- * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       |       |       |       |       |       |       |       |       |       |       |       |
- * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       |       |       |       |       |       |       |       |       |       |       |       |
- * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
- * |       |       |       |       |       |       |       |       |       |       |       |       |
- * `-----------------------------------------------------------------------------------------------'
- */
-[_HEAVEN] = LAYOUT_preonic_grid(
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  HEAVEN,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
 
 };
@@ -749,9 +751,9 @@ tap_dance_action_t tap_dance_actions[] = {
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (clockwise) {
-        tap_code_delay(KC_VOLD, 10);
-    } else {
         tap_code_delay(KC_VOLU, 10);
+    } else {
+        tap_code_delay(KC_VOLD, 10);
     }
     return false;
 }

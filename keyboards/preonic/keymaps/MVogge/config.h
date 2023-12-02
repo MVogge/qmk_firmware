@@ -16,6 +16,8 @@
 
 #pragma once
 
+#define ENCODER_RESOLUTION 2
+
 // Enable Tapping terms per key
 //#define TAPPING_TERM_PER_KEY
 
