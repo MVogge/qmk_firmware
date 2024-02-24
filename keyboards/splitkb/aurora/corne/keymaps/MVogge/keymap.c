@@ -42,6 +42,16 @@ enum custom_keycodes {
     OS_X,
     OS_Y,
     OS_Z,
+    OS_1,
+    OS_2,
+    OS_3,
+    OS_4,
+    OS_5,
+    OS_6,
+    OS_7,
+    OS_8,
+    OS_9,
+    OS_0,
     OS_DEL,
     OS_BSPC,
     OS_ENT,
@@ -140,11 +150,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, _______, _______,  OS_DEV,    OS_R,    OS_Z,                      _______, KC_KP_7, KC_KP_8, KC_KP_9, _______,  OS_DEL,
+      _______, _______, _______,  OS_DEV,    OS_R,    OS_Z,                      _______,    OS_7,    OS_8,    OS_9, _______,  OS_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      OS_PRGN,    OS_A,    OS_S,    OS_D,    OS_F,OS_SFT_R,                      _______, KC_KP_4, KC_KP_5, KC_KP_6, _______, OS_BSPC,
+      OS_PRGN,    OS_A,    OS_S,    OS_D,    OS_F,OS_SFT_R,                      _______,    OS_4,    OS_5,    OS_6, _______, OS_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,    OS_Y,    OS_X,    OS_C,    OS_V,    OS_B,                      KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, _______, _______,
+      _______,    OS_Y,    OS_X,    OS_C,    OS_V,    OS_B,                         OS_0,    OS_1,    OS_2,    OS_3, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,     OS_ENT, _______, _______
                                       //`--------------------------'  `--------------------------'
@@ -374,6 +384,166 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                  unregister_code16(C(KC_Y));
                } else {
                  unregister_code16(G(KC_Y));
+               }
+             }
+            return false;
+            break;
+          case OS_1:
+            if (record->event.pressed) {
+              if (is_windows) {
+                register_code(KC_KP_1);
+              } else {
+                register_code(KC_1);
+              }
+            } else {
+               if (is_windows) {
+                 unregister_code(KC_KP_1);
+               } else {
+                 unregister_code(KC_1);
+               }
+             }
+            return false;
+            break;
+          case OS_2:
+            if (record->event.pressed) {
+              if (is_windows) {
+                register_code(KC_KP_2);
+              } else {
+                register_code(KC_2);
+              }
+            } else {
+               if (is_windows) {
+                 unregister_code(KC_KP_2);
+               } else {
+                 unregister_code(KC_2);
+               }
+             }
+            return false;
+            break;
+          case OS_3:
+            if (record->event.pressed) {
+              if (is_windows) {
+                register_code(KC_KP_3);
+              } else {
+                register_code(KC_3);
+              }
+            } else {
+               if (is_windows) {
+                 unregister_code(KC_KP_3);
+               } else {
+                 unregister_code(KC_3);
+               }
+             }
+            return false;
+            break;
+          case OS_4:
+            if (record->event.pressed) {
+              if (is_windows) {
+                register_code(KC_KP_4);
+              } else {
+                register_code(KC_4);
+              }
+            } else {
+               if (is_windows) {
+                 unregister_code(KC_KP_4);
+               } else {
+                 unregister_code(KC_4);
+               }
+             }
+            return false;
+            break;
+          case OS_5:
+            if (record->event.pressed) {
+              if (is_windows) {
+                register_code(KC_KP_5);
+              } else {
+                register_code(KC_5);
+              }
+            } else {
+               if (is_windows) {
+                 unregister_code(KC_KP_5);
+               } else {
+                 unregister_code(KC_5);
+               }
+             }
+            return false;
+            break;
+          case OS_6:
+            if (record->event.pressed) {
+              if (is_windows) {
+                register_code(KC_KP_6);
+              } else {
+                register_code(KC_6);
+              }
+            } else {
+               if (is_windows) {
+                 unregister_code(KC_KP_6);
+               } else {
+                 unregister_code(KC_6);
+               }
+             }
+            return false;
+            break;
+          case OS_7:
+            if (record->event.pressed) {
+              if (is_windows) {
+                register_code(KC_KP_7);
+              } else {
+                register_code(KC_7);
+              }
+            } else {
+               if (is_windows) {
+                 unregister_code(KC_KP_7);
+               } else {
+                 unregister_code(KC_7);
+               }
+             }
+            return false;
+            break;
+          case OS_8:
+            if (record->event.pressed) {
+              if (is_windows) {
+                register_code(KC_KP_8);
+              } else {
+                register_code(KC_8);
+              }
+            } else {
+               if (is_windows) {
+                 unregister_code(KC_KP_8);
+               } else {
+                 unregister_code(KC_8);
+               }
+             }
+            return false;
+            break;
+          case OS_9:
+            if (record->event.pressed) {
+              if (is_windows) {
+                register_code(KC_KP_9);
+              } else {
+                register_code(KC_9);
+              }
+            } else {
+               if (is_windows) {
+                 unregister_code(KC_KP_9);
+               } else {
+                 unregister_code(KC_9);
+               }
+             }
+            return false;
+            break;
+          case OS_0:
+            if (record->event.pressed) {
+              if (is_windows) {
+                register_code(KC_KP_0);
+              } else {
+                register_code(KC_0);
+              }
+            } else {
+               if (is_windows) {
+                 unregister_code(KC_KP_0);
+               } else {
+                 unregister_code(KC_0);
                }
              }
             return false;
