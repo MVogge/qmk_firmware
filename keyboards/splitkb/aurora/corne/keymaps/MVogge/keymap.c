@@ -199,6 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool is_windows = false;
 uint8_t mod_state;
+uint8_t backslash_mod_state;
 bool is_backslash_registered = false;
 bool is_program_switch_registered = false;
 
@@ -229,12 +230,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           case KC_PSLS:
             if (record->event.pressed) {
               if ((mod_state == MOD_BIT(KC_LSFT)) | (mod_state == MOD_BIT(KC_RSFT))) {
+                backslash_mod_state = mod_state;
+                clear_mods();
                 if (is_windows) {
-                  clear_mods();
                   register_mods(MOD_BIT(KC_ALGR));
                   register_code(KC_MINS);
                 } else {
-                  register_mods(MOD_MASK_SA);
+                  register_mods(MOD_BIT(KC_LSFT));
+                  register_mods(MOD_BIT(KC_LALT));
                   register_code(KC_7);
                 }
                 is_backslash_registered = true;
@@ -244,13 +247,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               if (is_backslash_registered) {
                 if (is_windows) {
                   unregister_code(KC_MINS);
-                  unregister_mods(MOD_BIT(KC_ALGR));
                 } else {
                   unregister_code(KC_7);
-                  unregister_mods(MOD_MASK_SA);
                 }
+                clear_mods();
                 is_backslash_registered = false;
-                register_mods(MOD_BIT(KC_RSFT));
+                register_mods(backslash_mod_state);
                 return false;
               }
             }
