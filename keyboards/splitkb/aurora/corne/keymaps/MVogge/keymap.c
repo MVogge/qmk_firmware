@@ -110,7 +110,7 @@ const key_override_t kp_8_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_KP_8, 
 const key_override_t kp_9_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_KP_9, S(KC_9));
 
 // This globally defines all key overrides to be used
-const key_override_t **key_overrides = (const key_override_t *[]){
+const key_override_t *key_overrides[] = {
     &kp_1_key_override,
     &kp_2_key_override,
     &kp_3_key_override,
@@ -119,8 +119,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &kp_6_key_override,
     &kp_7_key_override,
     &kp_8_key_override,
-    &kp_9_key_override,
-    NULL // Null terminate the array of overrides!
+    &kp_9_key_override
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -199,7 +198,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool is_windows = false;
 uint8_t mod_state;
-uint8_t backslash_mod_state;
 bool is_backslash_registered = false;
 bool is_program_switch_registered = false;
 
@@ -230,7 +228,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           case KC_PSLS:
             if (record->event.pressed) {
               if ((mod_state == MOD_BIT(KC_LSFT)) | (mod_state == MOD_BIT(KC_RSFT))) {
-                backslash_mod_state = mod_state;
                 clear_mods();
                 if (is_windows) {
                   register_mods(MOD_BIT(KC_ALGR));
@@ -252,7 +249,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 clear_mods();
                 is_backslash_registered = false;
-                register_mods(backslash_mod_state);
                 return false;
               }
             }

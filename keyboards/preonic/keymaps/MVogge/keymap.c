@@ -92,7 +92,7 @@ const key_override_t kp_9_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_KP_9, 
 const key_override_t backspace_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
 
 // This globally defines all key overrides to be used
-const key_override_t **key_overrides = (const key_override_t *[]){
+const key_override_t *key_overrides[] = {
     &kp_1_key_override,
     &kp_2_key_override,
     &kp_3_key_override,
@@ -102,8 +102,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &kp_7_key_override,
     &kp_8_key_override,
     &kp_9_key_override,
-    &backspace_key_override,
-    NULL // Null terminate the array of overrides!
+    &backspace_key_override
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -289,7 +288,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_mods(MOD_MASK_SA);
               }
               is_backslash_registered = false;
-              register_mods(MOD_BIT(KC_RSFT));
               return false;
             }
           }
@@ -619,13 +617,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OS_PIPE:
           if (record->event.pressed) {
             if (is_windows) {
-              register_code16(C(A(KC_NUBS)));
+              register_code16(RALT(KC_NUBS));
             } else {
               register_code16(A(KC_7));
             }
           } else {
              if (is_windows) {
-               unregister_code16(C(A(KC_NUBS)));
+               unregister_code16(RALT(KC_NUBS));
              } else {
                unregister_code16(A(KC_7));
              }
@@ -676,10 +674,8 @@ void brace_left(tap_dance_state_t *state, void *user_data) {
         reset_tap_dance(state);
     } else if (state->count == 2) {
         if (is_windows) {
-            register_code(KC_LCTL);
             register_code(KC_RALT);
             tap_code(KC_7);
-            unregister_code(KC_LCTL);
             unregister_code(KC_RALT);
         } else {
             register_code(KC_LALT);
@@ -689,10 +685,8 @@ void brace_left(tap_dance_state_t *state, void *user_data) {
         reset_tap_dance(state);
     } else if (state->count >= 3) {
         if (is_windows) {
-            register_code(KC_LCTL);
             register_code(KC_RALT);
             tap_code(KC_8);
-            unregister_code(KC_LCTL);
             unregister_code(KC_RALT);
         } else {
             register_code(KC_LALT);
@@ -713,10 +707,8 @@ void brace_right(tap_dance_state_t *state, void *user_data) {
         reset_tap_dance(state);
     } else if (state->count == 2) {
         if (is_windows) {
-            register_code(KC_LCTL);
             register_code(KC_RALT);
             tap_code(KC_0);
-            unregister_code(KC_LCTL);
             unregister_code(KC_RALT);
         } else {
             register_code(KC_LALT);
@@ -726,10 +718,8 @@ void brace_right(tap_dance_state_t *state, void *user_data) {
         reset_tap_dance(state);
     } else if (state->count >= 3) {
         if (is_windows) {
-            register_code(KC_LCTL);
             register_code(KC_RALT);
             tap_code(KC_9);
-            unregister_code(KC_LCTL);
             unregister_code(KC_RALT);
         } else {
             register_code(KC_LALT);
