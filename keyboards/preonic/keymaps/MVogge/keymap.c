@@ -167,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______,  OS_DEV,    OS_R,    OS_Z,    OS_Z, KC_KP_7, KC_KP_8, KC_KP_9,  KC_DEL, OS_BSPC,
   OS_PRGN,    OS_A,    OS_S,    OS_D,    OS_F,OS_SFT_R, _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_BSPC,  OS_ENT,
   _______,    OS_Y,    OS_X,    OS_C,    OS_V,    OS_B, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3,  KC_ENT, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, OS_WRDL, MOVE_DN, MOVE_UP, OS_WRDR
+  _______, _______, _______, _______, _______, _______, LCAG(KC_ENT), _______, OS_WRDL, MOVE_DN, MOVE_UP, OS_WRDR
 ),
 
 /* Raise
